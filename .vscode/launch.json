@@ -2,10 +2,18 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Attach Functions Startup",
+            "type": "coreclr",
+            "request": "attach",
+            "preLaunchTask": "func shell (functions)",
+
+            
+        },
+        {
             "name": "Attach Functions",
             "type": "coreclr",
             "request": "attach",
-            "processId": "${command:azureFunctions.pickProcess}"
+            "processId": "${command:azureFunctions.pickProcess}",
         },
         {
             "name": "Client",
@@ -18,7 +26,10 @@
     "compounds": [
         {
             "name": "Client/Functions",
-            "configurations": ["Attach Functions", "Client"]
+            "configurations": [
+                "Attach Functions",
+                "Client"
+            ]
         }
     ]
 }

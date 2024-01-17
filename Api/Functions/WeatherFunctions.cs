@@ -1,10 +1,11 @@
 ﻿using System.Net;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
+using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
 using Microsoft.Extensions.Logging;
-using Shared.Models;
+using Shared;
 
-namespace Api.Functions;
+namespace Api;
 
 public class WeatherFunctions
 {
@@ -16,6 +17,8 @@ public class WeatherFunctions
         }
 
         [Function("Weather-Get")]
+        [OpenApiOperation("Weather-Get", "Weather-Get", Description = "Obtém a previsão do tempo")]
+        [OpenApiResponseWithBody(HttpStatusCode.OK, MimeMapping.KnownMimeTypes.Json, typeof(WeatherForecast[]))]
         public async Task<HttpResponseData> Get([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req)
         {
             _logger.LogInformation("Função do tempo invocada");

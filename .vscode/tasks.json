@@ -68,6 +68,7 @@
 			}
 		},
 		{
+			"label": "func (functions)",
 			"type": "func",
 			"dependsOn": "build (functions)",
 			"options": {
@@ -76,6 +77,23 @@
 			"command": "host start",
 			"isBackground": true,
 			"problemMatcher": "$func-dotnet-watch"
+		},
+		{
+			"label": "func shell (functions)",
+			"type": "shell",
+			"command": "func",
+			"args": [
+				"host",
+				"start"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"isBackground": true,
+			"options": {
+				"cwd": "${workspaceFolder}/Api",
+			}
 		}
 	]
 }
