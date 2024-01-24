@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using HotChocolate.AzureFunctions;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
@@ -13,12 +14,20 @@ public class TagFunctions
 {
     private readonly ILogger<TagFunctions> _logger;
     private readonly Context _context;
+    private readonly IGraphQLRequestExecutor _executor;
 
-    public TagFunctions(ILoggerFactory loggerFactory, Context context)
+    public TagFunctions(ILogger<TagFunctions> logger, Context context, IGraphQLRequestExecutor executor)
     {
-        _logger = loggerFactory.CreateLogger<TagFunctions>(); 
+        _logger = logger;
         _context = context;
+        _executor = executor;
     }
+
+    [Function("GraphQLHttpFunction")]
+    public Task<HttpResponseData> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = "graphql/{**slug}")] HttpRequestData request)
+		=> _executor.ExecuteAsync(request);
+    
+    
     [Function("Add")]
     [OpenApiOperation("Function-Add", "Add", Description = "Adicina uma nova tag")]
     [OpenApiRequestBody(KnownMimeTypes.Json, typeof(TagDto))]
