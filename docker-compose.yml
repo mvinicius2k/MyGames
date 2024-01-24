@@ -1,8 +1,27 @@
 version: '3.4'
 
 services:
-  mygames:
-    image: mygames
-    build:
-      context: .
-      dockerfile: ./Dockerfile
+  mariadb_db_container:
+    image: mariadb:10.6
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: Admin1234
+    networks:
+      - sql-network
+    ports:
+      - 3306:3306
+
+  adminer_container:
+    image: adminer:latest
+    restart: always
+    networks:
+      - sql-network
+    environment:
+      ADMINER_DEFAULT_SERVER: mariadb_db_container
+    ports:
+      - 8080:8080
+
+
+networks: 
+  sql-network:
+    driver: bridge

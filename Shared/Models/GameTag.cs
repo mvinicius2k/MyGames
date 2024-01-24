@@ -1,10 +1,14 @@
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Shared;
 
 public class GameTag
 {
-    [ForeignKey(nameof(TagInstance))]
+    
+    public const int TagMaxLength = Shared.Tag.NameMaxLength;
+
+    [ForeignKey(nameof(TagInstance)), MaxLength(TagMaxLength)]
     public string Tag { get; set; }
     public int GameId { get; set; }
     public bool Highlight { get; set; }

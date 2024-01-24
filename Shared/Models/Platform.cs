@@ -4,7 +4,9 @@ namespace Shared;
 
 public class Platform
 {
-    [Key]
+    public const int NameMaxLength = 20;
+
+    [Key, MaxLength(NameMaxLength)]
     public string Name { get; set; }
 
     public ICollection<GamePlatform> GamePlatforms { get; set; }

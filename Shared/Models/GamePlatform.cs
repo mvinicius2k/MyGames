@@ -4,6 +4,8 @@ namespace Shared;
 
 public class GamePlatform
 {
+    
+
     [ForeignKey(nameof(PlatformInstance))]
     public string Platform { get; set; }
     public int GameId { get; set; }

@@ -5,6 +5,12 @@ namespace Api;
 
 public class Context : DbContext
 {
+    public DbSet<Game> Games { get; set; }
+    public DbSet<Tag> Tags { get; set; }
+    public DbSet<Platform> Platforms { get; set; }
+    public DbSet<GamePlatform> GamePlatforms { get; set; }
+    public DbSet<GameTag> GameTags { get; set; }
+
     public Context(DbContextOptions options) : base(options)
     {
         

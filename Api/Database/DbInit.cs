@@ -28,7 +28,11 @@ public class DbInit
 #endif
 
             }
+#if DEBUG
             _context.Database.EnsureCreated();
+#else
+            _logger.LogInformation("Não é permitido criar o DB fora de depuração");
+#endif
 
         }
         catch (OperationCanceledException e)

@@ -24,24 +24,24 @@ var host = new HostBuilder()
     {
         services.AddApplicationInsightsTelemetryWorkerService();
         services.ConfigureFunctionsApplicationInsights();
-        // services.AddDbContext<Context>(opt =>
-        // {
-        //     var connectionString = hostContext.Configuration.GetSection(Values.ConnectionKey).Value ?? throw new Exception("String de conexão inv�lida");
-        //     var version = new MariaDbServerVersion(new Version("10.6"));
-        //     opt.UseMySql(connectionString, version);
+        services.AddDbContext<Context>(opt =>
+        {
+            var connectionString = hostContext.Configuration.GetSection(Values.ConnectionKey).Value ?? throw new Exception("String de conexão inv�lida");
+            var version = new MariaDbServerVersion(new Version("10.6"));
+            opt.UseMySql(connectionString, version);
 
-        // });
-        // services.AddScoped<DbInit>();
+        });
+        services.AddScoped<DbInit>();
     })
     .Build();
 
-// using (var scope = host.Services.CreateScope())
-// {
-//     var services = scope.ServiceProvider;
-//     var dbInit = services.GetRequiredService<DbInit>();
-//     dbInit.Prepare(restart: Restart);
-//     dbInit.Seed();
+using (var scope = host.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var dbInit = services.GetRequiredService<DbInit>();
+    dbInit.Prepare(restart: Restart);
+    dbInit.Seed();
 
-// }
+}
 
 host.Run();
