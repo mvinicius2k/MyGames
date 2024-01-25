@@ -25,7 +25,7 @@ builder.ConfigureFunctionsWorkerDefaults(w =>
     w.UseNewtonsoftJson();
 
 })
-.AddGraphQLFunction(g => g.AddQueryType<Query>())
+.AddGraphQLFunction(g => g.AddQueryType<Query>().AddFiltering())
 .ConfigureServices((hostContext, services) =>
 {
     services.AddApplicationInsightsTelemetryWorkerService();
@@ -53,3 +53,7 @@ using (var scope = host.Services.CreateScope())
 }
 
 host.Run();
+
+
+
+public partial class Program { } // Para o teste de integração
