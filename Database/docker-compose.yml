@@ -1,13 +1,6 @@
 version: '3.4'
 
 services:
-  api:
-    image: ${DOCKER_REGISTRY-}api
-    build:
-      context: .
-      dockerfile: Api/Dockerfile
-    networks:
-      - sql-network
   mariadb_db_container:
     image: mariadb:10.6
     restart: always

@@ -28,7 +28,7 @@ public class TagFunctions
 		=> _executor.ExecuteAsync(request);
     
     
-    [Function("Add")]
+    [Function("Tag_Add")]
     [OpenApiOperation("Function-Add", "Add", Description = "Adicina uma nova tag")]
     [OpenApiRequestBody(KnownMimeTypes.Json, typeof(TagDto))]
     [OpenApiResponseWithBody(HttpStatusCode.OK, KnownMimeTypes.Json, typeof(Tag))]

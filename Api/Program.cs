@@ -10,13 +10,13 @@ using Microsoft.Extensions.Hosting;
 
 const bool Restart = true;
 
-#if DEBUG
+//#if DEBUG
 
-while (!Debugger.IsAttached)
-    Thread.Sleep(1000);
+// while (!Debugger.IsAttached)
+//     Thread.Sleep(1000);
 
-#endif
-
+//#endif
+Console.WriteLine("Debugger: " + Debugger.IsAttached);
 var builder = new HostBuilder();
 
 
@@ -33,7 +33,7 @@ builder.ConfigureFunctionsWorkerDefaults(w =>
 
     services.AddDbContext<Context>(opt =>
     {
-        var connectionString = hostContext.Configuration.GetSection(Values.ConnectionKey).Value ?? throw new Exception("String de conexão inv�lida");
+        var connectionString = hostContext.Configuration.GetSection(Values.ConnectionKey).Value ?? throw new Exception("String de conexão inválida: " +  Debugger.IsAttached);
         var version = new MariaDbServerVersion(new Version("10.6"));
         opt.UseMySql(connectionString, version);
 
