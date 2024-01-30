@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ApiTests": {
+      "commandName": "Project",
+      "remoteDebugEnabled": false
+    }
+  }
+}

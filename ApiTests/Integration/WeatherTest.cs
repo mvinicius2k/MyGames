@@ -1,34 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DotNet.Testcontainers.Builders;
+using Ductus.FluentDocker.Services;
+
 
 namespace ApiTests.Integration;
 
-public class WeatherTest : IClassFixture<AzureFunctionsTestcontainersFixture>
+public class WeatherTest
 {
-    private readonly AzureFunctionsTestcontainersFixture _containerFixture;
+    
 
-    public WeatherTest(AzureFunctionsTestcontainersFixture containerFixture)
-    {
-        _containerFixture = containerFixture;
-    }
 
     [Fact]
     public async Task Get_ForecastWeather_Returns_SucessCode()
     {
-        var http = new HttpClient();
 
-        var requestUri = new UriBuilder(
-            Uri.UriSchemeHttp,
-            _containerFixture.AzureFunctionsContainerInstance.Hostname,
-            _containerFixture.AzureFunctionsContainerInstance.GetMappedPublicPort(80),
-            "Weather-Get"
-        ).Uri;
+        var http = new HttpClient
+        {
+            BaseAddress = new Uri("http://localhost:5000/api/")
+        };
 
-        HttpResponseMessage response = await http.GetAsync(requestUri);
+        HttpResponseMessage response = await http.GetAsync("Weather-Get");
 
         Assert.True(response.IsSuccessStatusCode);
     }

@@ -12,3 +12,13 @@ O projeto Shared são as estruturas comuns entre os dois projetos
 2. Veja se a configuração da string de conexão em `local.settings.json` está alinhada com o que está escrito no `docker-compose.yml`;
 3. Inicie o Azurite (Se estiver no vscode);
 4. Escolha o launch `Attach Functions Startup`, espere até o log do `func shell (functions)` inicializar, então clique para continuar depurando;
+
+# Depurando testes
+
+## Visual Studio
+
+Para depurar os testes é necessário primeiro iniciar normalmente um teste em modo depuração. Após isso inicie uma instância do docker-compose sem depurar, quando terminar a inicialização anexe o depurador ao processo dotnet do conteiner docker.
+
+## VS Code
+
+Inicie normalmente os containers do docker-compose, depois anexe o depurador e por fim depure o teste que quiser

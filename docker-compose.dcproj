@@ -6,6 +6,9 @@
     <DockerPublishLocally>False</DockerPublishLocally>
     <ProjectGuid>3b9e9284-01a6-4f44-93ce-fe5faefadc5d</ProjectGuid>
   </PropertyGroup>
+	<!-- <PropertyGroup>
+		<DockerfileFastModeStage>debug</DockerfileFastModeStage>
+	</PropertyGroup> -->
   <ItemGroup>
     <None Include="docker-compose.override.yml">
       <DependentUpon>docker-compose.yml</DependentUpon>

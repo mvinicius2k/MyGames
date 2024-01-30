@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 
-const bool Restart = true;
+const bool Restart = false;
 
 //#if DEBUG
 
@@ -23,8 +23,9 @@ var builder = new HostBuilder();
 builder.ConfigureFunctionsWorkerDefaults(w =>
 {
     w.UseNewtonsoftJson();
-
+    
 })
+    
 .AddGraphQLFunction(g => g.AddQueryType<Query>().AddFiltering())
 .ConfigureServices((hostContext, services) =>
 {
@@ -33,7 +34,9 @@ builder.ConfigureFunctionsWorkerDefaults(w =>
 
     services.AddDbContext<Context>(opt =>
     {
-        var connectionString = hostContext.Configuration.GetSection(Values.ConnectionKey).Value ?? throw new Exception("String de conexão inválida: " +  Debugger.IsAttached);
+
+        //var connectionString = hostContext.Configuration.GetSection(Values.ConnectionKey).Value ?? throw new Exception("String de conexão inválida: " +  Debugger.IsAttached);
+        var connectionString = Environment.GetEnvironmentVariable(Values.ConnectionKey) ?? throw new Exception("String de conexão não encontrada");
         var version = new MariaDbServerVersion(new Version("10.6"));
         opt.UseMySql(connectionString, version);
 
