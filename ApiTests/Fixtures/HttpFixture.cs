@@ -16,5 +16,10 @@ namespace ApiTests.Fixtures
             {
                 BaseAddress = new Uri("http://localhost:5000/api/")
             };
+        public HttpClient GetGraphQLClient()
+       => new()
+       {
+           BaseAddress = new Uri("http://localhost:5000/api/graphql/")
+       };
     }
 }
