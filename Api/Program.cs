@@ -26,7 +26,6 @@ builder.ConfigureFunctionsWorkerDefaults(w =>
     
 })
     
-.AddGraphQLFunction(g => g.AddQueryType<Query>().AddFiltering())
 .ConfigureServices((hostContext, services) =>
 {
     services.AddApplicationInsightsTelemetryWorkerService();
