@@ -31,7 +31,8 @@
             "type": "dotnet",
             "request": "launch",
             "projectPath": "${workspaceFolder}\\Client\\Client.csproj",
-            "launchConfigurationId": "TargetFramework=;https"
+            "launchConfigurationId": "TargetFramework=;https",
+            
         },
         {
             // Use IntelliSense to find out which attributes exist for C# debugging
